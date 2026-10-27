@@ -6,6 +6,7 @@ import { useNow, MissingScreen, CLASS_NAMES, PreContentContext } from "./lib/ui"
 import { ErrorBoundary } from "./lib/ErrorBoundary";
 import { TopMenu } from "./chrome/TopMenu";
 import { HeaderInfo } from "./chrome/HeaderInfo";
+import { BottomBar } from "./chrome/BottomBar";
 import { syncFarmConfig } from "./lib/farm";
 import { emitLive, openLive, runCoalesced, setConnected } from "./lib/live";
 import { useGroups } from "./lib/groups";
@@ -618,6 +619,7 @@ export default function App() {
           </div>
         )}
       </ErrorBoundary>
+      <BottomBar screen={screen} go={go} />
     </>
   );
 }

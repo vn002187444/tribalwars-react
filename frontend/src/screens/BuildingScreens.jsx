@@ -1,4 +1,5 @@
 import { Fragment, useEffect, useRef } from "react";
+import { useTranslation } from "../i18n/useTranslation";
 import { fmtDuration, onTime } from "../lib/data";
 import { GreyNum, MissingScreen, Timer } from "../lib/ui";
 import { SmithBody } from "./buildings/SmithBody";
@@ -31,13 +32,14 @@ import {
    (templates/twlan/controllers/game/{main,storage,hide,wall,res}/*.php and
    templates/layouts/building.php) so the original game.css styles it. */
 
-const levelText = (level) => (level > 0 ? `Level ${level}` : "not constructed");
+const levelText = (level, t) => (level > 0 ? (t ? `${t("buildings.level")} ${level}` : `Level ${level}`) : (t ? t("buildings.notConstructed") : "not constructed"));
 
 /* `style="... !important"` cannot be expressed through React's style prop. */
 const important = (prop, value) => (el) => el && el.style.setProperty(prop, value, "important");
 
 /* layouts/building.php: image + name (level) + description. */
 function BuildingHeader({ id, level }) {
+  const { t } = useTranslation();
   const b = B[id];
   return (
     <table width="100%">
@@ -47,7 +49,7 @@ function BuildingHeader({ id, level }) {
             <img src={bigImg(id, level)} alt={b.name} />
           </td>
           <td width="100%">
-            <h2>{`${b.name} (${levelText(level)})`}</h2>
+            <h2>{`${b.name} (${levelText(level, t)})`}</h2>
             {b.text}
           </td>
         </tr>
@@ -62,6 +64,7 @@ function BuildingHeader({ id, level }) {
 const FREE_FINISH_MS = 180 * 1000;
 
 function BuildQueue({ village, hq, onCancel, onFinish }) {
+  const { t } = useTranslation();
   const queue = village.buildQueue;
   if (queue.length === 0) return null;
   const rows = [];
@@ -81,10 +84,10 @@ function BuildQueue({ village, hq, onCancel, onFinish }) {
       <table id="build_queue" className="vis">
         <tbody id="buildqueue">
           <tr>
-            <th width="250">Construction assignment</th>
-            <th width="100">Duration</th>
-            <th width="150">Completion</th>
-            <th>Cancellation</th>
+            <th width="250">{t("buildings.assignment")}</th>
+            <th width="100">{t("buildings.duration")}</th>
+            <th width="150">{t("buildings.completion")}</th>
+            <th>{t("buildings.cancellation")}</th>
             <th ref={important("background", "none")} />
           </tr>
           {rows.map((r) => {
@@ -100,7 +103,7 @@ function BuildQueue({ village, hq, onCancel, onFinish }) {
                   <img src={midImg(r.id, r.q.targetLevel)} title="" alt="" className="bmain_list_img" />
                   {B[r.id].name}
                   <br />
-                  {`Level ${r.q.targetLevel}`}
+                  {`${t("buildings.level")} ${r.q.targetLevel}`}
                 </td>
                 <td width="100" className="nowrap lit-item">
                   {r.active ? <Timer target={r.finish} /> : <span>{fmtDuration(r.seconds * 1000)}</span>}
@@ -110,13 +113,13 @@ function BuildQueue({ village, hq, onCancel, onFinish }) {
                 </td>
                 <td className="lit-item">
                   <a className="btn btn-cancel" href="#" onClick={(e) => onCancel(e, r.q)}>
-                    cancel
+                    {t("buildings.cancel")}
                   </a>
                   {r.active && r.finish - Date.now() <= FREE_FINISH_MS && (
                     <>
                       {" "}
-                      <a className="btn btn-instant-free" href="#" title="Complete this order for free (less than 3 minutes left)" onClick={(e) => { e.preventDefault(); onFinish?.(r.q); }}>
-                        Complete
+                      <a className="btn btn-instant-free" href="#" title={t("buildings.completeFree")} onClick={(e) => { e.preventDefault(); onFinish?.(r.q); }}>
+                        {t("buildings.complete")}
                       </a>
                     </>
                   )}

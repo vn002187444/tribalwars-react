@@ -1,0 +1,102 @@
+/* Tribal Wars Mobile App Dock */
+.tw-bottom-dock {
+  position: fixed;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  height: 56px;
+  background: #24160c;
+  background: linear-gradient(180deg, #372314 0%, #1f1208 100%);
+  border-top: 2px solid #804000;
+  box-shadow: 0 -2px 10px rgba(0, 0, 0, 0.5);
+  display: flex;
+  align-items: center;
+  justify-content: space-around;
+  z-index: 9999;
+  padding: 0 4px;
+  box-sizing: border-box;
+}
+
+.tw-bottom-item {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  height: 100%;
+  color: #cbb48b;
+  text-decoration: none;
+  font-family: Verdana, Arial, sans-serif;
+  font-size: 10px;
+  font-weight: bold;
+  padding: 4px 2px;
+  cursor: pointer;
+  transition: all 0.2s ease;
+  user-select: none;
+  -webkit-tap-highlight-color: transparent;
+}
+
+.tw-bottom-item:hover,
+.tw-bottom-item.active {
+  color: #fff;
+  background: rgba(255, 255, 255, 0.08);
+  border-radius: 6px;
+}
+
+.tw-bottom-item.active {
+  color: #ffd073;
+  border-top: 2px solid #ffd073;
+  margin-top: -2px;
+}
+
+.tw-bottom-icon {
+  font-size: 18px;
+  line-height: 20px;
+  margin-bottom: 2px;
+}
+
+.tw-bottom-label {
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  max-width: 68px;
+}
+
+/* Hide dock on Desktop screens */
+@media (min-width: 769px) {
+  .tw-bottom-dock {
+    display: none !important;
+  }
+}
+
+/* Mobile responsive enhancements */
+@media (max-width: 768px) {
+  body {
+    padding-bottom: 64px !important;
+  }
+
+  /* Make tables horizontally scrollable without breaking page layout */
+  .vis {
+    max-width: 100% !important;
+    overflow-x: auto !important;
+    display: block !important;
+    -webkit-overflow-scrolling: touch;
+  }
+
+  /* Touch-friendly buttons */
+  .btn,
+  .btn-build,
+  .btn-recruit,
+  .btn-cancel {
+    min-height: 38px !important;
+    padding: 6px 14px !important;
+    font-size: 13px !important;
+    box-sizing: border-box !important;
+  }
+
+  /* Compact header resources */
+  #header_info {
+    flex-wrap: wrap;
+    justify-content: center;
+  }
+}

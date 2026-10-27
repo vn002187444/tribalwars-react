@@ -4,6 +4,8 @@
     "error": "Có lỗi xảy ra",
     "save": "Lưu",
     "cancel": "Hủy",
+    "close": "Đóng",
+    "confirm": "Xác nhận",
     "logout": "Đăng xuất",
     "support": "Hỗ trợ",
     "friends": "Bạn bè",
@@ -15,7 +17,15 @@
     "rank": "Hạng",
     "points": "Điểm",
     "village": "Làng",
-    "villages": "Các Làng"
+    "villages": "Các Làng",
+    "population": "Dân số",
+    "wood": "Gỗ",
+    "clay": "Sét",
+    "iron": "Sắt",
+    "duration": "Thời gian",
+    "all": "Tất cả",
+    "yes": "Có",
+    "no": "Không"
   },
   "menu": {
     "overview": "Tổng quan",
@@ -85,6 +95,7 @@
     }
   },
   "overview": {
+    "title": "Tổng quan Làng",
     "headquarters": "Nhà chính",
     "barracks": "Trại lính",
     "stable": "Trại ngựa",
@@ -102,6 +113,82 @@
     "statue": "Tượng đài",
     "place": "Trại tập trung"
   },
+  "buildings": {
+    "level": "Cấp",
+    "notConstructed": "Chưa xây dựng",
+    "fullyConstructed": "Công trình đã đạt cấp tối đa",
+    "construct": "Xây dựng",
+    "upgradeTo": "Nâng cấp lên cấp",
+    "cancel": "Hủy",
+    "complete": "Hoàn thành ngay",
+    "completeFree": "Hoàn thành miễn phí (còn dưới 3 phút)",
+    "assignment": "Nhiệm vụ xây dựng",
+    "duration": "Thời gian",
+    "completion": "Hoàn thành",
+    "cancellation": "Hủy",
+    "requirements": "Yêu cầu",
+    "building": "Công trình",
+    "build": "Xây dựng",
+    "farmTooSmall": "Nông trại quá nhỏ",
+    "warehouseTooSmall": "Nhà kho quá nhỏ",
+    "resAvailable": "Đủ tài nguyên lúc",
+    "resAvailableIn": "Đủ tài nguyên trong",
+    "notEnoughRes": "Không đủ tài nguyên"
+  },
+  "military": {
+    "unit": "Đơn vị",
+    "requirements": "Yêu cầu",
+    "inVillageTotal": "Trong làng / Tổng",
+    "recruit": "Chiêu mộ",
+    "recruitUnit": "Chiêu mộ đơn vị",
+    "produce": "Huấn luyện",
+    "train": "Chiêu mộ",
+    "decommission": "Giải ngũ",
+    "mass": "Chiêu mộ hàng loạt",
+    "massDecommission": "Giải ngũ hàng loạt",
+    "available": "Sẵn có",
+    "all": "Tất cả",
+    "attack": "Tấn công",
+    "support": "Tiếp viện",
+    "commands": "Lệnh điều quân",
+    "troops": "Quân đội",
+    "simulator": "Mô phỏng chiến trận",
+    "target": "Mục tiêu",
+    "coordinates": "Tọa độ",
+    "villageName": "Tên làng",
+    "sendArmy": "Xuất quân",
+    "rallyPoint": "Trại tập trung",
+    "rallyPointDesc": "Nơi các chiến binh tập hợp. Tại đây bạn có thể điều động quân đội.",
+    "noMoreNobles": "Không thể huấn luyện thêm Quý tộc"
+  },
+  "smith": {
+    "title": "Lò rèn",
+    "assignment": "Nhiệm vụ nghiên cứu",
+    "research": "Nghiên cứu",
+    "techLevel": "Cấp công nghệ",
+    "fullyResearched": "Công nghệ đã nghiên cứu tối đa",
+    "reqUnmet": "Chưa đủ điều kiện công trình"
+  },
+  "snob": {
+    "title": "Viện hàn lâm",
+    "train": "Chiêu mộ",
+    "mintCoin": "Đúc tiền vàng",
+    "mint": "Đúc xu",
+    "coinsMinted": "Số xu vàng đã đúc",
+    "coinsNeeded": "Số xu cần cho Quý tộc tiếp theo",
+    "coinsMissing": "Số xu còn thiếu"
+  },
+  "market": {
+    "title": "Chợ",
+    "sendRes": "Gửi tài nguyên",
+    "buy": "Mua",
+    "sell": "Bán",
+    "transports": "Vận chuyển",
+    "merchantsAvailable": "Lái buôn sẵn có:",
+    "capacityPerMerchant": "Sức chở mỗi lái buôn:",
+    "send": "Gửi",
+    "createOffer": "Tạo ưu đãi"
+  },
   "reports": {
     "title": "Báo cáo",
     "new": "Mới",
@@ -113,7 +200,13 @@
     "delete": "Xóa",
     "markRead": "Đánh dấu đã đọc",
     "subject": "Tiêu đề",
-    "time": "Thời gian"
+    "time": "Thời gian",
+    "attacker": "Bên tấn công",
+    "defender": "Bên phòng thủ",
+    "luck": "May mắn",
+    "morale": "Tinh thần",
+    "casualties": "Thương vong",
+    "loot": "Chiến lợi phẩm"
   },
   "map": {
     "title": "Bản đồ",
@@ -124,6 +217,10 @@
     "y": "Y",
     "player": "Người chơi",
     "tribe": "Bộ lạc",
-    "points": "Điểm"
+    "points": "Điểm",
+    "distance": "Khoảng cách",
+    "travelTime": "Thời gian di chuyển",
+    "barbarian": "Làng bỏ hoang / Man tộc",
+    "bonus": "Làng thưởng"
   }
 }
