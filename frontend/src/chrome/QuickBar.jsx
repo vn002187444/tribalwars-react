@@ -1,4 +1,7 @@
+import { useTranslation } from "../i18n/useTranslation";
+
 export function QuickBar({ go }) {
+  const { t } = useTranslation();
   const item = (screen, icon, label) => (
     <li>
       <span>
@@ -20,9 +23,9 @@ export function QuickBar({ go }) {
                   <td className="left" />
                   <td className="main">
                     <ul className="menu quickbar">
-                      {item("building:HEADQUARTERS", "main", "Headquarters")}
-                      {item("train", "barracks", "Recruit")}
-                      {item("place", "place", "Rally point")}
+                      {item("building:HEADQUARTERS", "main", t('overview.headquarters'))}
+                      {item("train", "barracks", t('overview.barracks'))}
+                      {item("place", "place", t('overview.place'))}
                     </ul>
                   </td>
                   <td className="right" />

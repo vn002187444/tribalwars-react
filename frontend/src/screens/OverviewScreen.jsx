@@ -1,10 +1,11 @@
 import { useState } from "react";
 import { createPortal } from "react-dom";
+import { useTranslation } from "../i18n/useTranslation";
 import { UNITS, fmtDuration, onTime } from "../lib/data";
 import { commandInfo } from "../lib/military";
 import { Timer } from "../lib/ui";
 import {
-  DEFAULT_ORDER, SCENE, WIDGET_TITLES, absInt, bigImageFile, greyInt, isNight, lsGet, lsSet, popCost, prodUnit,
+  DEFAULT_ORDER, SCENE, WIDGET_TITLES, WIDGET_TITLE_KEYS, absInt, bigImageFile, greyInt, isNight, lsGet, lsSet, popCost, prodUnit,
   sceneLevels, visualImages,
 } from "../lib/overview";
 
@@ -72,6 +73,8 @@ export function Widget({ id, title, children, open: openProp, onToggle, dragProp
 }
 
 function HiddenWidget({ id, dragProps }) {
+  const { t } = useTranslation();
+  const title = t(WIDGET_TITLE_KEYS[id]) || WIDGET_TITLES[id];
   return (
     <div
       id={"show_" + id}
@@ -79,7 +82,7 @@ function HiddenWidget({ id, dragProps }) {
       ref={rawStyle("display:none;")}
       {...(dragProps?.wrapper ?? {})}
     >
-      <h4>{WIDGET_TITLES[id]}</h4>
+      <h4>{title}</h4>
     </div>
   );
 }
@@ -511,6 +514,7 @@ const displayName = (v) => `${v.name} (${v.x}|${v.y}) K${Math.floor(v.y / 100)}$
 
 /* ---------- page ---------- */
 export function OverviewScreen({ village, villages = [], go, onBuild, busy, onCancelBuild, fetchedAt }) {
+  const { t } = useTranslation();
   const [visual, setVisualState] = useState(() => lsGet("twlan_ov_visual", true));
   const [showLevels, setShowLevelsState] = useState(() => lsGet("twlan_ov_labels", true));
   const [order, setOrder] = useState(() => lsGet("twlan_ov_order", DEFAULT_ORDER));
@@ -601,8 +605,11 @@ export function OverviewScreen({ village, villages = [], go, onBuild, busy, onCa
       handle: { draggable: true, onDragStart: () => setDragId(id), onDragEnd: () => setDragId(null) },
     };
     if (!w.active) return <HiddenWidget key={id} id={id} dragProps={dragProps} />;
+    
+    const title = t(WIDGET_TITLE_KEYS[id]) || WIDGET_TITLES[id];
+    
     return (
-      <Widget key={id} id={id} title={WIDGET_TITLES[id]} open={!collapsed["show_" + id]} onToggle={() => toggle("show_" + id)} dragProps={dragProps}>
+      <Widget key={id} id={id} title={title} open={!collapsed["show_" + id]} onToggle={() => toggle("show_" + id)} dragProps={dragProps}>
         {w.body}
       </Widget>
     );

@@ -11,16 +11,18 @@ import { ShipmentsTable, useMarket } from "./MarketScreen";
    - unknown/missing mode renders like "combined".
    - the row icons/titles are static in the original (its own "TODO: Implement real data here"). */
 
+import { useTranslation } from "../i18n/useTranslation";
+
 export const OVERVIEW_MODES = [
-  ["combined", "Combined"],
-  ["prod", "Production"],
-  ["trader", "Transports"],
-  ["units", "Troops"],
-  ["commands", "Commands"],
-  ["incomings", "Incoming"],
-  ["buildings", "Buildings"],
-  ["tech", "Research"],
-  ["groups", "Groups"],
+  ["combined", "Combined", "menu.children.Combined"],
+  ["prod", "Production", "menu.children.Production"],
+  ["trader", "Transports", "menu.children.Transports"],
+  ["units", "Troops", "menu.children.Troops"],
+  ["commands", "Commands", "menu.children.Commands"],
+  ["incomings", "Incoming", "menu.children.Incoming"],
+  ["buildings", "Buildings", "menu.children.Buildings"],
+  ["tech", "Research", "menu.children.Research"],
+  ["groups", "Groups", "menu.children.Groups"],
 ];
 
 /* [unit id, backend unit type or null (we have no such unit), localized name] in the original's order */
@@ -448,6 +450,7 @@ function TransportsView({ village, go, rows }) {
 }
 
 export function OverviewVillagesScreen({ village, mode, go, onRename, onSelectVillage, groups }) {
+  const { t } = useTranslation();
   const current = OVERVIEW_MODES.some(([m]) => m === mode) ? mode : "combined";
   const name = village.name;
   const setRenamed = (n) => onRename && onRename(n);
@@ -461,9 +464,9 @@ export function OverviewVillagesScreen({ village, mode, go, onRename, onSelectVi
       <table className="vis modemenu" width="100%" id="overview_menu">
         <tbody>
           <tr>
-            {OVERVIEW_MODES.map(([m, label]) => (
+            {OVERVIEW_MODES.map(([m, label, tKey]) => (
               <td key={m} style={{ textAlign: "center" }} className={m === current ? "selected" : undefined} width="100">
-                <a href="#" onClick={(e) => go(e, OV(m))}>{label}</a>
+                <a href="#" onClick={(e) => go(e, OV(m))}>{t(tKey) !== tKey ? t(tKey) : label}</a>
               </td>
             ))}
           </tr>

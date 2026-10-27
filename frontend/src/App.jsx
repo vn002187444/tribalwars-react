@@ -41,7 +41,10 @@ const REAL_BUILDING_SCREENS = new Set([
 
 const VICTORY_LABELS = { DOMINATION: "Domination", WAR: "The war", RUNE: "The race for the rune villages" };
 
+import { useTranslation } from './i18n/useTranslation.jsx';
+
 export default function App() {
+  const { t, changeLanguage, lang } = useTranslation();
   const [village, setVillage] = useState(null);
   const [villages, setVillages] = useState([]);
   const [reports, setReports] = useState([]);
@@ -527,9 +530,9 @@ export default function App() {
                 </tbody>
               </table>
               <p className="server_info">
-                {`generated in ${genTime} ms `}
+                {`${t('common.generatedIn')} ${genTime} ${t('common.ms')} `}
                 <b>|</b>
-                {" Server time: "}
+                {` ${t('common.serverTime')} `}
                 <span id="serverTime">{fmtClock(nowDate)}</span>
                 {" - "}
                 <span id="serverDate">{fmtDate(nowDate)}</span>
@@ -561,13 +564,13 @@ export default function App() {
           <div id="footer_left">
             <a href="#" onClick={(e) => e.preventDefault()}>tribalwars - nilz clone</a>
             {"\u00a0-\u00a0"}
-            <a href="#" onClick={(e) => go(e, "settings:ticket")}>Support</a>
+            <a href="#" onClick={(e) => go(e, "settings:ticket")}>{t('common.support')}</a>
             {"\u00a0-\u00a0"}
-            <a href="#" onClick={(e) => go(e, "buddies")}>Friends</a>
+            <a href="#" onClick={(e) => go(e, "buddies")}>{t('common.friends')}</a>
             {account?.admin && (
               <>
                 {"\u00a0-\u00a0"}
-                <a href="#" onClick={(e) => go(e, "admin")}>Admin</a>
+                <a href="#" onClick={(e) => go(e, "admin")}>{t('common.admin')}</a>
               </>
             )}
             {"\u00a0-\u00a0"}
@@ -579,7 +582,7 @@ export default function App() {
                 setWorldOpen((o) => !o);
               }}
             >
-              Worlds
+              {t('common.worlds')}
             </a>
             {"\u00a0-\u00a0"}
             <a
@@ -589,8 +592,13 @@ export default function App() {
                 onLogout();
               }}
             >
-              Log out
+              {t('common.logout')}
             </a>
+            {"\u00a0-\u00a0"}
+            <select value={lang} onChange={(e) => changeLanguage(e.target.value)} style={{ padding: '2px', fontSize: '10px' }}>
+              <option value="en">EN</option>
+              <option value="vi">VI</option>
+            </select>
           </div>
         </div>
       </div>

@@ -1,114 +1,8 @@
 import { OV, PLAYER_NAME } from "../lib/data";
-
-export const MENU = [
-  {
-    label: "Overviews",
-    screen: OV("combined"),
-    children: [
-      ["Combined", OV("combined")],
-      ["Production", OV("prod")],
-      ["Transports", OV("trader")],
-      ["Troops", OV("units")],
-      ["Commands", OV("commands")],
-      ["Incoming", OV("incomings")],
-      ["Buildings", OV("buildings")],
-      ["Research", OV("tech")],
-      ["Groups", OV("groups")],
-    ],
-  },
-  { label: "Map", screen: "map", id: "menu_map_link" },
-  {
-    label: "Reports",
-    screen: "report:all",
-    reports: true,
-    children: [
-      ["All reports", "report:all"],
-      ["Attacks", "report:attack"],
-      ["Defenses", "report:defense"],
-      ["Support", "report:support"],
-      ["Trade", "report:trade"],
-      ["Miscellaneous", "report:other"],
-      ["Forwarded", "report:forwarded"],
-      ["Filter", "report:filter"],
-      ["Block sender", "settings:block"],
-      ["Publicized reports", "report:public"],
-    ],
-  },
-  {
-    label: "Mail",
-    mail: true,
-    screen: "mail:in",
-    children: [
-      ["Mail", "mail:in"],
-      ["Circular mail", "mail:mass_out"],
-      ["Write message", "mail:new"],
-      ["Block sender", "settings:block"],
-      ["Address book", "mail:address"],
-      ["Folders", "mail:groups"],
-    ],
-  },
-  { pad: "lpad" },
-  {
-    ranking: true,
-    label: "Ranking",
-    screen: "ranking:player",
-    children: [
-      ["Tribes", "ranking:ally"],
-      ["Players", "ranking:player"],
-      ["Continent Tribes", "ranking:con_ally"],
-      ["Continent Players", "ranking:con_player"],
-      ["Opponents defeated tribal ranking", "ranking:kill_ally"],
-      ["Opponents defeated", "ranking:kill_player"],
-      ["Wars", "ranking:wars"],
-    ],
-  },
-  {
-    label: "Tribe",
-    screen: "ally",
-    ally: true,
-    // layouts/game.php: with an unread forum post the entry gets the "new_post" icon and this dropdown
-    children: [
-      ["Overview", "ally:overview"],
-      ["Profile", "ally:profile"],
-      ["Members", "ally:members"],
-      ["Tribal forum", "ally:forum"],
-    ],
-  },
-  { pad: "rpad" },
-  {
-    label: "Profile",
-    screen: "info_player",
-    profile: true,
-    children: [
-      ["__player__", "info_player", "badge"],
-      ["inventory", "inventory", "badge badge-inventory"],
-      ["achievements", "info_player:awards", "badge"],
-      ["statistics", "info_player:stats_own", "badge"],
-      ["Friends", "buddies", "badge badge-buddy"],
-      ["Blocked players", "info_player:block", "badge"],
-    ],
-  },
-  {
-    label: "Settings",
-    screen: "settings",
-    children: [
-      ["Profile", "settings:profile"],
-      ["Settings", "settings:settings"],
-      ["Change password", "settings:change_passwd"],
-      ["Delete account", "settings:delete"],
-      ["Notifications", "settings:notify"],
-      ["Edit quick bar", "settings:quickbar"],
-      ["Logins", "settings:logins"],
-      ["Surveys", "settings:poll"],
-      ["Toolbar", "settings:toolbar"],
-      ["iPhone & Android", "settings:push"],
-      ["Block player", "settings:block"],
-      ["Support ticket", "settings:ticket"],
-    ],
-  },
-];
+import { useTranslation } from "../i18n/useTranslation";
 
 export function DropDown({ items, go, playerName }) {
+  const { t } = useTranslation();
   return (
     <table cellSpacing="0" className="menu_column">
       <tbody>
@@ -116,7 +10,7 @@ export function DropDown({ items, go, playerName }) {
           <tr key={label + target}>
             <td className="menu-column-item">
               <a href="#" onClick={(e) => go(e, target)}>
-                {label === "__player__" ? playerName : label}
+                {label === "__player__" ? playerName : t(`menu.children.${label.replace(/ /g, '_')}`) !== `menu.children.${label.replace(/ /g, '_')}` ? t(`menu.children.${label.replace(/ /g, '_')}`) : label}
                 {badge && <span className={badge}> </span>}
               </a>
             </td>
@@ -134,6 +28,122 @@ export function DropDown({ items, go, playerName }) {
 }
 
 export function TopMenu({ go, unreadReports = 0, newForumPost = false, newMails = 0, points, playerName = PLAYER_NAME, rank = 1 }) {
+  const { t } = useTranslation();
+
+  const MENU = [
+    {
+      label: "Overviews",
+      tKey: "menu.overview",
+      screen: OV("combined"),
+      children: [
+        ["Combined", OV("combined")],
+        ["Production", OV("prod")],
+        ["Transports", OV("trader")],
+        ["Troops", OV("units")],
+        ["Commands", OV("commands")],
+        ["Incoming", OV("incomings")],
+        ["Buildings", OV("buildings")],
+        ["Research", OV("tech")],
+        ["Groups", OV("groups")],
+      ],
+    },
+    { label: "Map", tKey: "map.title", screen: "map", id: "menu_map_link" },
+    {
+      label: "Reports",
+      tKey: "reports.title",
+      screen: "report:all",
+      reports: true,
+      children: [
+        ["All reports", "report:all"],
+        ["Attacks", "report:attack"],
+        ["Defenses", "report:defense"],
+        ["Support", "report:support"],
+        ["Trade", "report:trade"],
+        ["Miscellaneous", "report:other"],
+        ["Forwarded", "report:forwarded"],
+        ["Filter", "report:filter"],
+        ["Block sender", "settings:block"],
+        ["Publicized reports", "report:public"],
+      ],
+    },
+    {
+      label: "Mail",
+      tKey: "menu.messages",
+      mail: true,
+      screen: "mail:in",
+      children: [
+        ["Mail", "mail:in"],
+        ["Circular mail", "mail:mass_out"],
+        ["Write message", "mail:new"],
+        ["Block sender", "settings:block"],
+        ["Address book", "mail:address"],
+        ["Folders", "mail:groups"],
+      ],
+    },
+    { pad: "lpad" },
+    {
+      ranking: true,
+      label: "Ranking",
+      tKey: "menu.ranking",
+      screen: "ranking:player",
+      children: [
+        ["Tribes", "ranking:ally"],
+        ["Players", "ranking:player"],
+        ["Continent Tribes", "ranking:con_ally"],
+        ["Continent Players", "ranking:con_player"],
+        ["Opponents defeated tribal ranking", "ranking:kill_ally"],
+        ["Opponents defeated", "ranking:kill_player"],
+        ["Wars", "ranking:wars"],
+      ],
+    },
+    {
+      label: "Tribe",
+      tKey: "menu.tribe",
+      screen: "ally",
+      ally: true,
+      children: [
+        ["Overview", "ally:overview"],
+        ["Profile", "ally:profile"],
+        ["Members", "ally:members"],
+        ["Tribal forum", "ally:forum"],
+      ],
+    },
+    { pad: "rpad" },
+    {
+      label: "Profile",
+      tKey: "menu.profile",
+      screen: "info_player",
+      profile: true,
+      children: [
+        ["__player__", "info_player", "badge"],
+        ["inventory", "inventory", "badge badge-inventory"],
+        ["achievements", "info_player:awards", "badge"],
+        ["statistics", "info_player:stats_own", "badge"],
+        ["Friends", "buddies", "badge badge-buddy"],
+        ["Blocked players", "info_player:block", "badge"],
+      ],
+    },
+    {
+      label: "Settings",
+      tKey: "menu.settings",
+      screen: "settings",
+      children: [
+        ["Profile", "settings:profile"],
+        ["Settings", "settings:settings"],
+        ["Change password", "settings:change_passwd"],
+        ["Delete account", "settings:delete"],
+        ["Notifications", "settings:notify"],
+        ["Edit quick bar", "settings:quickbar"],
+        ["Logins", "settings:logins"],
+        ["Surveys", "settings:poll"],
+        ["Toolbar", "settings:toolbar"],
+        ["iPhone & Android", "settings:push"],
+        ["Block player", "settings:block"],
+        ["Support ticket", "settings:ticket"],
+      ],
+    },
+  ];
+
   return (
     <div id="topContainer">
       <table id="topTable" style={{ textAlign: "center" }} cellSpacing="0">
@@ -150,11 +160,11 @@ export function TopMenu({ go, unreadReports = 0, newForumPost = false, newMails 
                         return (
                           <td key={i} className="menu-item">
                             <a href="#" onClick={(e) => go(e, item.screen)}>
-                              &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;{item.label}
+                              &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;{t(item.tKey)}
                             </a>
                             <div className="buttonicon">
                               <a href="#" onClick={(e) => go(e, "ally:forum")} style={{ display: "inline" }}>
-                                <span className="icon header new_post" title="New posts in the tribal forum" />
+                                <span className="icon header new_post" title={t('menu.new_post')} />
                               </a>
                             </div>
                             <DropDown items={item.children} go={go} playerName={playerName} />
@@ -168,7 +178,7 @@ export function TopMenu({ go, unreadReports = 0, newForumPost = false, newMails 
                         return (
                           <td key={i} className="menu-item" id="topdisplay">
                             <div className="bg">
-                              <a href="#" onClick={(e) => go(e, item.screen)}>{item.label}</a>
+                              <a href="#" onClick={(e) => go(e, item.screen)}>{t(item.tKey)}</a>
                               <div className="rank">
                                 (<span id="rank_rank">{rank}</span>.|<span id="rank_points">{points}</span> P)
                               </div>
@@ -183,8 +193,8 @@ export function TopMenu({ go, unreadReports = 0, newForumPost = false, newMails 
                             {item.reports && (
                               <span id="new_report" className={"icon header new_report" + (unreadReports > 0 ? "" : "_faded")} />
                             )}
-                            {item.mail && newMails > 0 && <span className="icon header new_mail" title="New mail" />}
-                            {item.profile ? <> {item.label} <span id="menu_counter_profile" className="badge" /></> : item.label}
+                            {item.mail && newMails > 0 && <span className="icon header new_mail" title={t('menu.new_mail')} />}
+                            {item.profile ? <> {t(item.tKey)} <span id="menu_counter_profile" className="badge" /></> : t(item.tKey)}
                             {item.reports && (
                               <>
                                 {" "}

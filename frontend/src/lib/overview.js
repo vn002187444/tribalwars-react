@@ -172,3 +172,18 @@ export const WIDGET_TITLES = {
   groups: "Group association",
   notes: "Notes",
 };
+
+export const WIDGET_TITLE_KEYS = {
+  summary: "overview.buildings",
+  outgoingUnits: "overview.yourTroops",
+  incomingUnits: "overview.incomingTroops",
+  newbie: "overview.beginnersProtection",
+  prod: "overview.production",
+  units: "overview.units",
+  loyalty: "overview.loyalty",
+  belief: "overview.belief",
+  flags: "overview.flags",
+  buildqueue: "overview.buildingQueue",
+  groups: "overview.groupAssociation",
+  notes: "overview.notes",
+};

@@ -3,6 +3,7 @@ import { createRoot } from 'react-dom/client'
 import './App.css'
 import App from './App.jsx'
 import { ErrorBoundary } from './lib/ErrorBoundary.jsx'
+import { I18nProvider } from './i18n/useTranslation.jsx'
 
 // Last-resort catch: without this, an uncaught render error anywhere below <App/> unmounts the whole
 // React tree and leaves only body's CSS background visible (see lib/ErrorBoundary.jsx for the full story).
@@ -23,7 +24,9 @@ function AppCrashed({ error }) {
 createRoot(document.getElementById('root')).render(
   <StrictMode>
     <ErrorBoundary fallback={(error) => <AppCrashed error={error} />}>
-      <App />
+      <I18nProvider>
+        <App />
+      </I18nProvider>
     </ErrorBoundary>
   </StrictMode>,
 )

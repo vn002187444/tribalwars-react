@@ -2,6 +2,7 @@ import { useState } from "react";
 import { createPortal } from "react-dom";
 import { resClass } from "../lib/data";
 import { ShadowRow } from "../lib/ui";
+import { useTranslation } from "../i18n/useTranslation";
 
 // The original ships some inline styles as "margin:0;padding:0;"; keep the attribute verbatim.
 const rawStyle = (css) => (el) => {
@@ -81,6 +82,7 @@ function GroupPopup({ village, rect, onSelect, onClose, groups }) {
 }
 
 export function HeaderInfo({ village, go, now, fetchedAt, onSwitchVillage, onSelectVillage, groups }) {
+  const { t } = useTranslation();
   const [groupsOpen, setGroupsOpen] = useState(false);
   const [groupsRect, setGroupsRect] = useState(null);
   const cap = village.warehouseCapacity;
@@ -192,11 +194,11 @@ export function HeaderInfo({ village, go, now, fetchedAt, onSwitchVillage, onSel
                     <table className="box smallPadding" cellSpacing="0" ref={rawStyle("empty-cells:show;")}>
                       <tbody>
                         <tr ref={rawStyle("height:20px;")}>
-                          {resCell("wood", "wood", "Wood", village.wood, village.woodPerHour, "building:TIMBER_CAMP", true)}
-                          {resCell("stone", "stone", "Clay", village.clay, village.clayPerHour, "building:CLAY_PIT")}
-                          {resCell("iron", "iron", "Iron", village.iron, village.ironPerHour, "building:IRON_MINE")}
+                          {resCell("wood", "wood", t("overview.wood"), village.wood, village.woodPerHour, "building:TIMBER_CAMP", true)}
+                          {resCell("stone", "stone", t("overview.stone"), village.clay, village.clayPerHour, "building:CLAY_PIT")}
+                          {resCell("iron", "iron", t("overview.iron"), village.iron, village.ironPerHour, "building:IRON_MINE")}
                           <td className="box-item icon-box">
-                            <a href="#" title="Storage capacity" onClick={link("building:WAREHOUSE")}>
+                            <a href="#" title={t("overview.storage")} onClick={link("building:WAREHOUSE")}>
                               <span className="icon header ressources" />
                             </a>
                           </td>
@@ -221,7 +223,7 @@ export function HeaderInfo({ village, go, now, fetchedAt, onSwitchVillage, onSel
                       <tbody>
                         <tr>
                           <td className="box-item icon-box firstcell">
-                            <a href="#" title="Farm" onClick={link("building:FARM")}>
+                            <a href="#" title={t("overview.farm")} onClick={link("building:FARM")}>
                               <span className="icon header population" />
                             </a>
                           </td>
