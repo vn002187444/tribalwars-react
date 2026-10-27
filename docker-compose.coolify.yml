@@ -1,0 +1,31 @@
+services:
+  backend:
+    build:
+      context: ./backend
+    container_name: tribalwars-backend
+    environment:
+      - JAVA_TOOL_OPTIONS=-Xms256m -Xmx512m
+      - SPRING_DATASOURCE_URL=jdbc:h2:file:/data/twlan2;AUTO_SERVER=TRUE
+    volumes:
+      - /Volume1/@apps/tribalwars-react/data:/data
+    deploy:
+      resources:
+        limits:
+          cpus: "1.5"
+          memory: 768M
+    restart: unless-stopped
+
+  frontend:
+    build:
+      context: ./frontend
+    container_name: tribalwars-frontend
+    ports:
+      - "8092:80"
+    deploy:
+      resources:
+        limits:
+          cpus: "0.5"
+          memory: 128M
+    depends_on:
+      - backend
+    restart: unless-stopped
